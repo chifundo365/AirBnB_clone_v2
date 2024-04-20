@@ -119,7 +119,6 @@ class HBNBCommand(cmd.Cmd):
         new_dict = {}
         for arg in args:
             if "=" in arg:
-                print(arg)
                 kvp = arg.split('=', 1)
                 k = kvp[0]
                 v = kvp[1]
