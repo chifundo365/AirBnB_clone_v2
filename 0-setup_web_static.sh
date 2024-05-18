@@ -29,8 +29,8 @@ function create_folders() {
 }
 
 # Install nginx and create the necessary folder
-install nginx \
-	&& create_folders
+install nginx
+create_folders
 
 # give ownership of /data/ to 'ubuntu' user and group
 sudo chown -R ubuntu:ubuntu /data/
@@ -54,10 +54,10 @@ path="/data/web_static/releases/test/"
 if [ -L "$link" ] && [ -e  $link ]; then
 	echo "symbolic link exists. recreating it"
 	unlink "$link"
-	ln -s "$path" "$link"
+	sudo ln -s "$path" "$link"
 
 else
-	ln -s "$path" "$link"
+	sudo ln -s "$path" "$link"
 fi
 
 server="\
