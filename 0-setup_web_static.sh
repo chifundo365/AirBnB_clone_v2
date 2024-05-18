@@ -32,9 +32,6 @@ function create_folders() {
 install nginx
 create_folders
 
-# give ownership of /data/ to 'ubuntu' user and group
-sudo chown -R ubuntu:ubuntu /data/
-
 html="\
 <html>
   <head>
@@ -59,6 +56,9 @@ if [ -L "$link" ] && [ -e  $link ]; then
 else
 	sudo ln -s "$path" "$link"
 fi
+
+# give ownership of /data/ to 'ubuntu' user and group
+sudo chown -R ubuntu:ubuntu /data/
 
 server="\
 server {
