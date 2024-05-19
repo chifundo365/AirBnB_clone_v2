@@ -8,6 +8,9 @@ from fabric.api import *
 
 
 def do_pack():
+    """
+    creates an archive on the static folder in version folder
+    """
     dt = datetime.today().strftime("%Y%m%d%H%M%S")
     archive = "web_static_{}.tgz".format(dt)
     command = "tar -cvzf versions/{} web_static".format(archive)
