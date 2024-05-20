@@ -9,6 +9,7 @@ from fabric.api import *
 env.hosts = ['ubuntu@34.224.16.226', 'ubuntu@54.173.111.119']
 env.key_filename = '~/.ssh/my_key'
 
+
 def do_pack():
     """
     creates an archive on the web_static folder in 'versions' folder
@@ -24,13 +25,14 @@ def do_pack():
         return archive
     return None
 
+
 def do_deploy(archive_path):
     """
     Distributes an archive to two webservers.
-    unpacks the archive files to the appropriate locations for the server to serve
+    unpacks the archive files to the appropriate-
+    locations for the server to serve
     """
     from os.path import exists
-
 
     if exists(archive_path) is False:
         return False
@@ -47,5 +49,5 @@ def do_deploy(archive_path):
         sudo('rm -rf /data/web_static/current')
         sudo('ln -s {}{}/ /data/web_static/current'.format(path, no_ext))
         return True
-    except:
+    except Exception as e:
         return False
