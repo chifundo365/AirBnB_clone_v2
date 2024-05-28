@@ -66,5 +66,6 @@ class DBStorage:
                 expire_on_commit=False,
                 )
         self.__session = scoped_session(session_f)
+        print("<<<<<<<<<<<<<<<<<<<<<session>>>>>>>>>>>>>>>>>>",self.__session)
 
 
