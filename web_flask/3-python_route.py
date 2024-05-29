@@ -36,7 +36,7 @@ def c(text):
 def python(text='is cool'):
     """ Handles the /python and /python/<text> route """
     text = text.replace('_', ' ')
-    return 'Python {}'.format(scape(text))
+    return 'Python {}'.formate(text)
 
 
 if __name__ == '__main__':
