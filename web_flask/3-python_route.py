@@ -4,8 +4,13 @@ Starts a Flask web application
 """
 from flask import Flask
 from markupsafe import escape
+import logging
 
 app = Flask(__name__)
+
+# Disable Flask's default logging
+log = logging.getLogger('werkzeug')
+log.disabled = True
 
 
 @app.route('/', strict_slashes=False)
