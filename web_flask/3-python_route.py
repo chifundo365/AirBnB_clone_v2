@@ -31,21 +31,13 @@ def c(text):
     return 'C {}'.format(escape(text.replace('_', ' ')))
 
 
-"""
+
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def display_python(text='is cool'):
-Handles the /python and /python/<text> route
-    return 'python {}'.format(escapie(text.replace('_', ' ')))
-"""
-
-
-@app.route('/python', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def python(text="is cool"):
-    """Displays Python and text variable"""
-    text = text.replace("_", " ")
-    return "Python {}".format(text)
+    """ Handles the /python and /python/<text> route """
+    text = text.replace('_', ' ')
+    return 'Python {}'.format(scape(text))
 
 
 if __name__ == '__main__':
