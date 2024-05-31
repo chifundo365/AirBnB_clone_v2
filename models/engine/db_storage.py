@@ -41,10 +41,17 @@ class DBStorage:
         if cls:
             objects = self.session.query(cls).all()
         else:
-            objects = self.session.query(User, State, City, Amenity, Place, Review).all()
+            objects = self.session.query(
+                User,
+                State,
+                City,
+                Amenity,
+                Place,
+                Review
+                ).all()
         if objects:
             for obj in objects:
-                key  = '{}.{}'.format(obj.__class__.__name__)
+                key = '{}.{}'.format(obj.__class__.__name__)
                 obj_dict[key] = obj
         return obj_dict
 
@@ -69,4 +76,4 @@ class DBStorage:
 
     def close(self):
         """Calls the remove method on the private session"""
-        self.__session.remove()
+        self.__session.close()
