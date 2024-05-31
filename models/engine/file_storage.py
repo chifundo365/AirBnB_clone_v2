@@ -61,3 +61,7 @@ class FileStorage:
                 if obj.id == o.id:
                     break
             del self.__objects[k]
+
+    def close(self):
+        """Calls the reload method to deserialize object from a file"""
+        sef.reload()
