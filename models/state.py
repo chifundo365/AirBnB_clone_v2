@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base, Column, String
 from models.city import City
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
@@ -15,6 +16,7 @@ class State(BaseModel, Base):
         cities = relationship('City', backref='state', cascade='all, delete')
     else:
         name = ''
+
         @property
         def cities(self):
             from models import storage
@@ -23,4 +25,3 @@ class State(BaseModel, Base):
                 if city.state_id == self.id:
                     cities_list.append(city)
             return cities_list
-        
