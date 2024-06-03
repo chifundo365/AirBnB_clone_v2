@@ -3,8 +3,17 @@
 from sqlalchemy.orm import relationship
 from models import storage_t
 from models.base_model import BaseModel, Base
-from sqlalchemy import String, Column, ForeignKey, Integer, Float
+from sqlalchemy import String, Column, ForeignKey, Integer, Float, Table
 
+if storage_t == "db":
+    place_amenity = Table(
+            "place_amenity",
+            Base.metadata,
+            place_id = Column(String(60), ForeignKey("places.id"), nullable=False),
+            amenity_id = Column(String(60), ForeignKey("amenities.id"),
+                PrimaryKey=True, nullable=False)
+            )
+                   
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -22,6 +31,8 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", backref="place",
                                cascade="all, delete")
+        amenities = relationship("Amenity", secondary=place_amenity, viewonl=False,
+                                 back_populates="place")
     else:
         city_id = ""
         user_id = ""
@@ -40,7 +51,20 @@ class Place(BaseModel, Base):
             from models import storage
             from models.review import Review
             reviews = []
-            for review in storage.all(Review).items():
+            for review in storage.all(Review).values():
                 if review.place_id == self.id:
                     reviews.append(review)
             return reviews
+        
+        @property
+        def amenities(self):
+            """ 
+            Returns all the amenities with the place_id = id of Place
+            """
+            from models import storage
+            from models.amenity import Amenity
+            amenities = []
+            for amenity in storage.all(Amenity).values():
+                if amenity.place_id == self.id:
+                    amenities.append(amenity)
+            return amenities
