@@ -43,19 +43,36 @@ class DBStorage:
     def all(self, cls=None):
         """query on the current database session""" 
         new_dict = {}
-
         if cls:
             objs = self.__session.query(cls).all()
             for obj in objs:
                 key = obj.__class__.__name__ + '.' + obj.id
-                new_dict[key] = obj
+                if obj.__dict__.get('_sa_instance_state'):
+                    obj_dict = obj.__dict__.copy()
+                    del obj_dict['_sa_instance_state']
+                    new_obj = cls(**obj_dict)
+                    if hasattr(new_obj, '_sa_instance_state'):
+                        delattr(new_obj, '_sa_instance_state')
+                    new_dict[key] = new_obj
+                else:
+                    new_dict[key] = obj
         else:
             for clss in classes:
                 if cls is None or cls is classes[clss] or cls is clss:
                     objs = self.__session.query(classes[clss]).all()
                     for obj in objs:
                         key = obj.__class__.__name__ + '.' + obj.id
-                        new_dict[key] = obj
+                        if obj.__dict__.get('_sa_instance_state'):
+                            obj_dict = obj.__dict__.copy()
+                            del obj_dict['_sa_instance_state']
+                            new_obj = cls(**obj_dict)
+                            if hasattr(new_obj, '_sa_instance_state'):
+                                delattr(new_obj, '_sa_instance_state')
+                            new_dict[key] = new_obj
+                        else:
+                            new_dict[key] = obj
+                else:
+                    new_dict[key] = obj
         return (new_dict)
 
     def new(self, obj):
