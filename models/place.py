@@ -1,4 +1,4 @@
-mrn #!/usr/bin/python3
+#!/usr/bin/python3
 """ Place Module for HBNB project """
 from sqlalchemy.orm import relationship
 from models import storage_t
