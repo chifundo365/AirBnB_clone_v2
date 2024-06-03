@@ -3,7 +3,7 @@
 import models
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, Float,  ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = None
