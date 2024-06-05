@@ -1,5 +1,5 @@
 <!Doctype html>
-<HTML LANG="en">
+<HTML lang="en">
 	<HEAD>
 		<TITLE>HBNB</TITLE>
 	</HEAD>
@@ -8,7 +8,7 @@
 		<UL>
 
 		{% for state in states.values() | sort(attribute="name") %}
-		<LI> {{ state.id }}: <B>{{ state.name  }}</B> </LI>
+		<LI>{{ state.id }}: <B>{{ state.name  }}</B></LI>
 		{% endfor %} 
 
 		</UL>
