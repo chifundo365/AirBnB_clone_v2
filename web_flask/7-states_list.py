@@ -18,9 +18,11 @@ def states():
 
 
 @app.teardown_appcontext
-def remove_sqlalchemy_session():
+def remove_sqlalchemy_session(exc):
     storage.close()
 
 
 if __name__ == "__main__":
     app.run()
+else:
+    print("imported")
