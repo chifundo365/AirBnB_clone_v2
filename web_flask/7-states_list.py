@@ -3,7 +3,7 @@
 Start a Flask web appilcation [127.0.0.1:5000]
 """
 from flask import Flask, render_template
-from models import storage
+from models import storage, storage_t
 from models.state import State
 
 
@@ -22,7 +22,5 @@ def remove_sqlalchemy_session(exc):
     storage.close()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and storage_t == "db":
     app.run()
-else:
-    print("imported")
