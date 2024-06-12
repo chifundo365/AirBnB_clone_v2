@@ -15,7 +15,7 @@ app = Flask(__name__)
 def states():
     """ displays all the states in storage """
     states = list(storage.all(State).values())
-    return render_template("9-states.html", states=states, page=page)
+    return render_template("9-states.html", states=states, page="state")
 
 
 @app.route("/states/<id>", strict_slashes=False)
@@ -28,7 +28,7 @@ def states_with_id(id):
             matched = state
             break
     page = "state_id" if matched else "not_found"
-    return render_template("9-states.html", state=matched, page="states")
+    return render_template("9-states.html", state=matched, page=page)
 
 
 @app.errorhandler(404)
