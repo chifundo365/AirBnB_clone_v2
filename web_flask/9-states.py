@@ -15,7 +15,6 @@ app = Flask(__name__)
 def states():
     """ displays all the states in storage """
     states = list(storage.all(State).values())
-    page = "states" if len(states) else "not_found"
     return render_template("9-states.html", states=states, page=page)
 
 
