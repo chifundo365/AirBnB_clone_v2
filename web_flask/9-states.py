@@ -28,7 +28,7 @@ def states_with_id(id):
             matched = state
             break
     page = "state_id" if matched else "not_found"
-    return render_template("9-states.html", state=matched, page=page)
+    return render_template("9-states.html", state=matched, page="states")
 
 
 @app.errorhandler(404)
