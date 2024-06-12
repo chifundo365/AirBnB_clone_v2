@@ -10,21 +10,32 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.route("/states", strict_slashes=False)
 def states():
     """ displays all the states in storage """
-    states = list(storage.all(State))
-    return render_template("9-states.html", states=states, page="states")
+    states = list(storage.all(State).values())
+    page = "states" if len(states) else "not_found"
+    return render_template("9-states.html", states=states, page=page)
+
 
 @app.route("/states/<id>", strict_slashes=False)
 def states_with_id(id):
     """ Displays a state of the given id and its cities """
-    states = list(storage.all(State))
+    states = list(storage.all(State).values())
     matched = None
     for state in states:
         if state.id == id:
             matched = state
             break
-    return render_template("9-states.html", state=matched)
+    page = "state_id" if matched else "not_found"
+    return render_template("9-states.html", state=matched, page=page)
 
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("9-states.html", page="not_found")
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
