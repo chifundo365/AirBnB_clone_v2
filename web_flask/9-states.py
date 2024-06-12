@@ -36,5 +36,10 @@ def not_found(e):
     return render_template("9-states.html", page="not_found")
 
 
+@app.teardown_appcontext
+def close_sqlalchemy_session(exc):
+    storage.close()
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
