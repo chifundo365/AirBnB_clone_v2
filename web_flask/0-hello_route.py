@@ -7,11 +7,11 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/airbnb-onepage', strict_slashes=False)
 def home_page():
-    """ manages the / route """
+    """ Flask View that handles the airbnb-onepage route"""
     return 'Hello HBNB!'
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5000)
